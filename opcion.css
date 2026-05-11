@@ -1,0 +1,67 @@
+.selector-container {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 10px;
+}
+
+.restaurant-option {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 300px;
+}
+
+.restaurant-option:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.restaurant-option img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.restaurant-option h3 {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: var(--accent);
+}
+
+.restaurant-option p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.btn-select {
+    display: inline-block;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-select:hover {
+    background: #a15a43;
+}
+
+@media (max-width: 768px) {
+    .selector-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+}

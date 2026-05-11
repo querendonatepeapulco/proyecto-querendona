@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventario "La Querendona"</title>
+    <link rel="icon" href="img/logo_pestaña.png" type="image/png">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegacion principal">
+        <div class="brand">
+          <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <img src="img/logo1.png" alt="La Querendona Tepeapulco">
+
+          </div>
+          <div>
+            <strong>Inventario " La Querendona"</strong>
+            <small>Control operativo</small>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-panel="dashboard" type="button">
+            <span class="icon">⌂</span>
+            Panel
+          </button>
+          <button class="nav-item" data-panel="products" type="button">
+            <span class="icon">▦</span>
+            Productos
+          </button>
+          <button class="nav-item" data-panel="movements" type="button">
+            <span class="icon">↕</span>
+            Movimientos
+          </button>
+          <button class="nav-item" data-panel="settings" type="button">
+            <span class="icon">⚙</span>
+            Ajustes
+          </button>
+        </nav>
+
+        <div class="sidebar-card">
+          <span class="pulse-dot"></span>
+          <p>Inventario sincronizado en este navegador.</p>
+          <strong id="sidebarProducts">0 productos</strong>
+          <small id="sidebarRole">Sin sesion</small>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Vista general</p>
+            <h1>Gestion de inventario</h1>
+          </div>
+          <div class="topbar-actions">
+            <label class="search-box">
+              <span>⌕</span>
+              <input id="globalSearch" type="search" placeholder="Buscar producto, SKU o categoria" />
+            </label>
+            <div class="user-chip">
+              <span id="currentUserName">Usuario</span>
+              <strong id="currentUserRole">Rol</strong>
+            </div>
+            <button id="themeToggle" class="icon-button" type="button" title="Cambiar tema">◐</button>
+            <button id="logoutButton" class="icon-button" type="button" title="Cerrar sesion">↪</button>
+            <button id="openProductModal" class="primary-button" type="button">+ Producto</button>
+            <button id="openProductModal" class="primary-button" type="button">
+              <link rel="stylesheet" href="/index.html">Pagina Principal"La Queredona"
+            </button>
+          </div>
+        </header>
+
+        <section id="dashboard" class="panel active" aria-labelledby="dashboardTitle">
+          <div class="hero-band">
+            <div>
+              <p class="eyebrow">Operacion diaria</p>
+              <h2 id="dashboardTitle">Stock, ventas y alertas en una sola vista</h2>
+              <p class="hero-copy">Controla entradas, salidas, valor de inventario y productos criticos con datos guardados localmente.</p>
+            </div>
+            <div class="warehouse-visual" aria-hidden="true">
+              <div class="shelf shelf-one">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="shelf shelf-two">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="scanner-beam"></div>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric-card">
+              <span>Total productos</span>
+              <strong id="metricProducts">0</strong>
+              <small id="metricProductsHint">0 categorias activas</small>
+            </article>
+            <article class="metric-card">
+              <span>Unidades en stock</span>
+              <strong id="metricUnits">0</strong>
+              <small>Disponibles para venta</small>
+            </article>
+            <article class="metric-card">
+              <span>Valor inventario</span>
+              <strong id="metricValue">$0</strong>
+              <small>Precio de venta estimado</small>
+            </article>
+            <article class="metric-card alert">
+              <span>Bajo minimo</span>
+              <strong id="metricLowStock">0</strong>
+              <small>Necesitan reposicion</small>
+            </article>
+          </div>
+
+          <div class="content-grid">
+            <section class="workspace-section">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Prioridad</p>
+                  <h3>Productos con alerta</h3>
+                </div>
+                <button id="restockAll" class="ghost-button" type="button">Reponer sugerido</button>
+              </div>
+              <div id="alertList" class="alert-list"></div>
+            </section>
+
+            <section class="workspace-section">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Categorias</p>
+                  <h3>Distribucion</h3>
+                </div>
+              </div>
+              <canvas id="categoryChart" width="520" height="260" aria-label="Grafica de categorias"></canvas>
+            </section>
+          </div>
+
+          <section id="adminAlertSection" class="workspace-section admin-alert-section">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Avisos de capturistas</p>
+                <h3>Productos reportados como agotados</h3>
+              </div>
+              <span id="adminAlertCount" class="badge low">0 abiertos</span>
+            </div>
+            <div id="adminAlertList" class="alert-list"></div>
+          </section>
+        </section>
+
+        <section id="products" class="panel" aria-labelledby="productsTitle">
+          <div class="toolbar">
+            <div>
+              <p class="eyebrow">Catalogo</p>
+              <h2 id="productsTitle">Productos registrados</h2>
+            </div>
+            <div class="toolbar-actions">
+              <select id="categoryFilter" aria-label="Filtrar por categoria">
+                <option value="all">Todas las categorias</option>
+              </select>
+              <select id="stockFilter" aria-label="Filtrar por estado">
+                <option value="all">Todos los estados</option>
+                <option value="ok">Stock saludable</option>
+                <option value="low">Bajo minimo</option>
+                <option value="out">Agotado</option>
+              </select>
+              <button id="exportData" class="ghost-button" type="button">Exportar JSON</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Descripcion</th>
+                  <th>Categoria</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="productRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="movements" class="panel" aria-labelledby="movementsTitle">
+          <div class="toolbar">
+            <div>
+              <p class="eyebrow">Historial</p>
+              <h2 id="movementsTitle">Entradas y salidas</h2>
+            </div>
+            <button id="clearMovements" class="ghost-button danger" type="button">Limpiar historial</button>
+          </div>
+          <div id="movementTimeline" class="timeline"></div>
+        </section>
+
+        <section id="settings" class="panel" aria-labelledby="settingsTitle">
+          <div class="toolbar">
+            <div>
+              <p class="eyebrow">Sistema</p>
+              <h2 id="settingsTitle">Ajustes y respaldo</h2>
+            </div>
+          </div>
+          <div class="settings-grid">
+            <article class="workspace-section">
+              <h3>Datos</h3>
+              <p>Guarda una copia o restaura el inventario de ejemplo.</p>
+              <div class="setting-actions">
+                <button id="downloadBackup" class="primary-button" type="button">Descargar respaldo</button>
+                <button id="resetDemo" class="ghost-button danger" type="button">Restaurar demo</button>
+              </div>
+            </article>
+            <article class="workspace-section">
+              <h3>Importar respaldo</h3>
+              <p>Selecciona un archivo JSON exportado desde este sistema.</p>
+              <input id="importFile" type="file" accept="application/json" />
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="productModal" class="modal-backdrop" aria-hidden="true">
+      <form id="productForm" class="modal" aria-labelledby="modalTitle">
+        <div class="modal-heading">
+          <div>
+            <p class="eyebrow">Producto</p>
+            <h2 id="modalTitle">Nuevo producto</h2>
+          </div>
+          <button id="closeProductModal" class="icon-button" type="button" title="Cerrar">×</button>
+        </div>
+        <input id="productId" type="hidden" />
+        <input id="sku" name="sku" type="hidden" />
+        <div class="form-grid">
+          <label>
+            Nombre
+            <input id="name" name="name" required maxlength="80" />
+          </label>
+          <label>
+            Categoria
+            <input id="category" name="category" list="categoryOptions" required maxlength="40" />
+            <datalist id="categoryOptions">
+              <option value="Abarrotes"></option>
+              <option value="Bebidas"></option>
+              <option value="Bolsas"></option>
+              <option value="Carne"></option>
+              <option value="Fruta y verdura"></option>
+              <option value="Molino"></option>
+            </datalist>
+          </label>
+          <label>
+            Cantidad
+            <input id="stock" name="stock" type="number" min="0" step="1" required />
+          </label>
+          <label>
+            Cantidad minima para alerta
+            <input id="minStock" name="minStock" type="number" min="0" step="1" required />
+          </label>
+          <label>
+            Precio
+            <input id="price" name="price" type="number" min="0" step="0.01" required />
+          </label>
+        </div>
+        <label>
+          Descripcion
+          <textarea id="description" name="description" maxlength="180" rows="3" placeholder="Presentacion, marca, tamano o detalle util"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button class="ghost-button" type="button" id="cancelProduct">Cancelar</button>
+          <button class="primary-button" type="submit">Guardar producto</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

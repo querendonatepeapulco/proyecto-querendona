@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Restaurante - La Querendona</title>
+    <link rel="icon" href="img/logo_pestaña.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="opcion.css">
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div class="brand"><img src="img/logo1.png" alt="Logo de La Querendona" style="height: 80px; margin-right: 5px;"></div>
+        </header>
+    </div>
+
+    <div class="selector-container">
+        <div class="restaurant-option" onclick="irA('tepeapulco.html')">
+            <img src="img/comida/eleccion.jpg" alt="La Querendona Tepeapulco" >
+            <h3>La Querendona Tepeapulco</h3>
+            <p>Ubicación: Tepeapulco</p>
+            <button class="btn-select">Seleccionar</button>
+        </div>
+
+        <div class="restaurant-option" onclick="irA('sahagún.html')">
+            <img src="img/logo2.png" alt="La Querendona Sahagún">
+            <h3>La Querendona Sahagún</h3>
+            <p>Ubicación: Sahagún</p>
+            <button class="btn-select">Seleccionar</button>
+        </div>
+    </div>
+
+    <script>
+        function irA(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

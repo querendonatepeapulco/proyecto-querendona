@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acceso | inventario_querendona</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="login-screen active" aria-labelledby="loginTitle">
+      <form id="loginForm" class="login-card">
+        <div class="login-visual" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p class="eyebrow">Acceso seguro</p>
+        <h1 id="loginTitle">inventario_querendona</h1>
+        <p class="login-copy">Inicia sesion para entrar al panel segun tu rol operativo.</p>
+        <div class="login-fields">
+          <label>
+            Usuario
+            <input id="loginUser" name="loginUser" autocomplete="username" required />
+          </label>
+          <label>
+            Contrasena
+            <input id="loginPassword" name="loginPassword" type="password" autocomplete="current-password" required />
+          </label>
+        </div>
+        <button class="primary-button" type="submit">Entrar</button>
+        <div class="login-hint">
+          <strong>Demo:</strong>
+          <span>admin / admin123</span>
+          <span>capturista / alta123</span>
+        </div>
+      </form>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="auth.js"></script>
+    <script src="login.js"></script>
+  </body>
+</html>

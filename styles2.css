@@ -1,0 +1,364 @@
+/* Variables de color y tipografía de "La Querendona" */
+:root {
+    --bg-mauve: #F5C4F5; /* Fondo lila suave distintivo de image_0.png */
+    --accent-brown: #a67c61; /* Marrón cálido de los botones y acentos */
+    --accent-brown-hover: #c18f72;
+    --text-primary: #1a1a1a; /* Negro para títulos principales */
+    --text-mauve-nav: #6c4c81; /* Lila más oscuro para enlaces de nav y texto pequeño */
+    --text-body: #333333; /* Gris oscuro para descripciones */
+    --card-bg: #ffffff;
+    --card-shadow: 0 10px 25px rgba(108, 76, 129, 0.1); /* Sombra suave y lilácea */
+    
+    --font-heading: 'Montserrat', sans-serif;
+    --font-logo: 'Great Vibes', cursive;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+/* Reseteo básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-mauve);
+    color: var(--text-body);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: transparent; /* Fondo transparente para mostrar el lila */
+}
+
+/* Logo recreado */
+.logo-container {
+    text-align: left;
+}
+
+.logo-text {
+    font-family: var(--font-logo);
+    color: var(--text-primary);
+    font-size: 2.8rem;
+    line-height: 1;
+}
+
+.logo-subtext {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-mauve-nav);
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Navegación superior */
+.top-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: var(--text-mauve-nav);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.top-nav a:hover {
+    color: var(--text-primary);
+}
+
+/* Botón de idioma */
+.lang-btn {
+    background-color: var(--accent-brown);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 20px; /* Borde redondeado pill */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.lang-btn:hover {
+    background-color: var(--accent-brown-hover);
+    transform: translateY(-1px);
+}
+
+/* Sección Hero */
+.hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 40px;
+    margin-bottom: 30px;
+}
+
+.hero-text-block {
+    flex: 1;
+    max-width: 50%;
+}
+
+.welcome-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-mauve-nav);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.enter-text {
+    color: var(--text-mauve-nav);
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.hero-button {
+    background-color: var(--accent-brown);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 25px; /* Redondeado más grande */
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.hero-button:hover {
+    background-color: var(--accent-brown-hover);
+    transform: translateY(-2px);
+}
+
+/* Panel de destaque recreado */
+.feature-card {
+    background-color: var(--card-bg);
+    border-radius: 25px; /* Bordes muy redondeados */
+    padding: 40px;
+    width: 380px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card-title-prefix {
+    font-weight: 600;
+    color: var(--text-mauve-nav);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.card-featured-title {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    color: var(--text-body);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.card-features {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card-features li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-body);
+}
+
+.card-features li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--text-mauve-nav);
+}
+
+/* Sección de Menú */
+.menu-section {
+    padding: 40px 40px 80px;
+    text-align: center;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+/* Filtros de menú pill recreados */
+.menu-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    background-color: var(--accent-brown);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--accent-brown-hover);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background-color: #6c4c81; /* Un color de acento adicional para el estado activo, liláceo */
+}
+
+/* Cuadrícula de Menú */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Cartas de menú recreadas como las feature card */
+.menu-item-card {
+    background-color: var(--card-bg);
+    border-radius: 25px; /* Bordes muy redondeados */
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.menu-item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(108, 76, 129, 0.15); /* Sombra más fuerte al hover */
+}
+
+.item-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: var(--accent-brown); /* Un color de acento adicional para los iconos */
+}
+
+.item-title {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.item-desc {
+    color: var(--text-body);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Para alinear el footer al fondo */
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-price {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.add-btn {
+    background-color: var(--accent-brown);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.add-btn:hover {
+    background-color: var(--accent-brown-hover);
+    transform: translateY(-1px);
+}
+
+/* Estilo para ocultar cartas */
+.hidden {
+    display: none;
+}
+
+/* Footer minimalist recreado */
+.minimalist-footer {
+    background-color: transparent; /* Fondo transparente */
+    text-align: center;
+    padding: 40px;
+    color: var(--text-mauve-nav);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(108, 76, 129, 0.2); /* Borde superior suave liláceo */
+}
+
+/* Toast Notificación recreada */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #6c4c81; /* Un color de acento liláceo */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: none; /* Oculto por defecto */
+    z-index: 1000;
+}
+
+.toast.show {
+    display: block;
+    animation: slideInDown 0.5s ease-in-out, fadeOut 3s 1.5s forwards;
+}
+
+@keyframes slideInDown {
+    from { transform: translate(-50%, 100px); }
+    to { transform: translate(-50%, 0); }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; }
+}
