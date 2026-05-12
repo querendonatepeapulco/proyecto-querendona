@@ -20,18 +20,20 @@ function revealOnScroll(){
 }
 
 window.addEventListener('scroll', revealOnScroll);
-
-revealOnScroll();
-window.addEventListener('scroll', revealOnScroll);
-// ACTIVAR AL CARGAR
 revealOnScroll();
 // EFECTO PARALLAX SUAVE
+const useParallax =
+    !window.matchMedia('(max-width: 768px)').matches &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if(useParallax){
 window.addEventListener('scroll', () => {
-const scrolled = window.scrollY;
-document.querySelectorAll('.floating').forEach(el => {
-el.style.transform = `translateY(${scrolled * 0.03}px)`;
+    const scrolled = window.scrollY;
+    document.querySelectorAll('.floating').forEach(el => {
+        el.style.transform = `translateY(${scrolled * 0.03}px)`;
+    });
 });
-});
+}
 // EFECTO HOVER DINÁMICO EN CARDS
 const cards = document.querySelectorAll('.card');
 cards.forEach(card => {
@@ -166,34 +168,77 @@ serviceCards.forEach((card)=>{
 
 window.addEventListener('DOMContentLoaded', ()=>{
 
-    const heroVideo = document.getElementById('heroVideo');
-    const soundBtn = document.getElementById('soundBtn');
+    const soundButtons = document.querySelectorAll('.sound-btn');
 
-    if(heroVideo && soundBtn){
+    soundButtons.forEach((button)=>{
 
-        soundBtn.addEventListener('click', ()=>{
+        const container = button.closest(
+            '.hero-video-container, .experience-video-container, .chefs-hero-video-container'
+        );
 
-            if(heroVideo.muted){
+        const video = container ? container.querySelector('video') : null;
 
-                heroVideo.muted = false;
+        if(!video){
+            return;
+        }
 
-                heroVideo.volume = 1;
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('preload', 'auto');
 
-                heroVideo.play();
+        button.setAttribute('type', 'button');
+        button.setAttribute('aria-label', 'Activar sonido');
 
-                soundBtn.innerHTML = '🔊';
+        button.addEventListener('click', async ()=>{
 
-            }else{
+            button.disabled = true;
 
-                heroVideo.muted = true;
+            try{
 
-                soundBtn.innerHTML = '🔇';
+                if(video.muted){
 
+                    video.muted = false;
+                    video.defaultMuted = false;
+                    video.volume = 1;
+
+                    if(video.readyState < 2){
+                        video.load();
+                    }
+
+                    await video.play();
+
+                    button.innerHTML = '🔊';
+                    button.setAttribute('aria-label', 'Silenciar video');
+
+                }else{
+
+                    video.muted = true;
+                    video.defaultMuted = true;
+
+                    await video.play().catch(()=>{});
+
+                    button.innerHTML = '🔇';
+                    button.setAttribute('aria-label', 'Activar sonido');
+                }
+
+            }catch(error){
+
+                video.muted = false;
+                video.defaultMuted = false;
+                video.volume = 1;
+                button.innerHTML = '🔊';
+                button.setAttribute('aria-label', 'Silenciar video');
+
+            }finally{
+
+                button.disabled = false;
             }
 
         });
 
-    }
+    });
 
 });
 
@@ -203,22 +248,25 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 const track = document.getElementById('carouselTrack');
 
-let position = 0;
+if(track){
+    let position = 0;
 
-setInterval(()=>{
+    setInterval(()=>{
 
-    const slideWidth = 345; // ancho + gap
+        const firstSlide = track.querySelector('.carousel-slide');
+        const slideWidth = firstSlide ? firstSlide.getBoundingClientRect().width + 25 : 345;
 
-    position -= slideWidth;
+        position -= slideWidth;
 
-    if(Math.abs(position) >= track.scrollWidth / 2){
+        if(Math.abs(position) >= track.scrollWidth - track.clientWidth){
 
-        position = 0;
-    }
+            position = 0;
+        }
 
-    track.style.transform = `translateX(${position}px)`;
+        track.style.transform = `translateX(${position}px)`;
 
-}, 2500);
+    }, 2500);
+}
 
 /* ========================= */
 /* SLIDE RIGHT REVEAL */
@@ -290,6 +338,7 @@ document.getElementById('menuToggle');
 const mobileMenu =
 document.getElementById('mobileMenu');
 
+if(menuToggle && mobileMenu){
 menuToggle.addEventListener('click', ()=>{
 
     mobileMenu.classList.toggle('active');
@@ -304,3 +353,11 @@ menuToggle.addEventListener('click', ()=>{
     }
 
 });
+
+mobileMenu.querySelectorAll('a').forEach((link)=>{
+    link.addEventListener('click', ()=>{
+        mobileMenu.classList.remove('active');
+        menuToggle.innerHTML = '☰';
+    });
+});
+}

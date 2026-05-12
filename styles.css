@@ -3126,3 +3126,1242 @@ body{
     }
 
 }
+
+/* ========================= */
+/* AJUSTE RESPONSIVE FINAL */
+/* ========================= */
+
+html,
+body {
+    max-width: 100%;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+.page {
+    width: min(100%, 1200px);
+}
+
+.hero-image-container,
+.hero-video-container,
+.experience-video-container,
+.contact-hero-image-container,
+.chefs-hero-video-container,
+.history-image-container,
+.about-image-container,
+.menu-image-card,
+.service-card,
+.chef-card,
+.featured-card,
+.history-card,
+.contact-container,
+.map-card,
+.quote-card {
+    max-width: 100%;
+}
+
+.hero-image-container {
+    width: 100%;
+}
+
+.home-experience-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+    justify-content: initial;
+    align-items: center;
+}
+
+.home-experience-section .experience-video-container {
+    width: 100%;
+}
+
+.home-experience-section .experience-card {
+    width: auto;
+    display: block;
+    background: white;
+}
+
+.about-experience-section {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.about-experience-section .experience-card {
+    width: min(900px, 100%);
+}
+
+.menu-image-card img,
+.service-image,
+.history-img,
+.about-img,
+.contact-hero-image,
+.hero-image,
+.featured-image,
+.chef-image img,
+.gallery-item img {
+    display: block;
+}
+
+@media(max-width:768px){
+    .page {
+        padding: 14px;
+        overflow: visible;
+    }
+
+    .navbar {
+        top: 10px;
+        padding: 12px 14px;
+        border-radius: 18px;
+        gap: 12px;
+    }
+
+    .brand img {
+        height: 56px;
+        max-width: 46vw;
+        object-fit: contain;
+    }
+
+    .menu-toggle {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        line-height: 1;
+    }
+
+    .navbar nav {
+        width: min(84vw, 320px);
+        padding: 84px 22px 28px;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 16px;
+        overflow-y: auto;
+    }
+
+    .navbar nav a,
+    #lang-select {
+        width: 100%;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero,
+    .menu-hero,
+    .about-hero,
+    .contact-hero,
+    .chefs-hero {
+        grid-template-columns: 1fr !important;
+        min-height: auto;
+        padding: 42px 0 !important;
+        gap: 24px;
+        text-align: center;
+    }
+
+    .hero-text {
+        order: initial;
+    }
+
+    .hero h1,
+    .menu-hero h1,
+    .about-hero h1,
+    .contact-hero h1,
+    .chefs-hero-text h1 {
+        font-size: clamp(2.2rem, 12vw, 3.35rem) !important;
+        line-height: 1.05;
+        overflow-wrap: anywhere;
+    }
+
+    .description,
+    .hero-content p,
+    .about-hero-text p,
+    .contact-text p,
+    .chefs-hero-text p {
+        font-size: .98rem;
+        line-height: 1.7;
+    }
+
+    .tag {
+        max-width: 100%;
+        line-height: 1.35;
+    }
+
+    .hero-buttons,
+    .menu-download {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cta,
+    .secondary-btn,
+    .btn-primary,
+    .about-btn {
+        width: 100%;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-image-container,
+    .hero-video-container,
+    .contact-hero-image-container,
+    .chefs-hero-video-container {
+        width: 100%;
+        height: clamp(260px, 70vw, 360px) !important;
+        border-radius: 24px;
+    }
+
+    .featured-section,
+    .menu-showcase,
+    .history-section,
+    .values-section,
+    .contact-section,
+    .map-section,
+    .social-section,
+    .carousel-section,
+    .about-section,
+    .quote-section {
+        padding: 36px 0;
+    }
+
+    .featured-card,
+    .history-card,
+    .contact-container,
+    .about-card,
+    .chef-card,
+    .about-experience-section .experience-card {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+        padding: 22px !important;
+        border-radius: 22px;
+    }
+
+    .home-experience-section,
+    .about-experience-section {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        justify-content: initial;
+        gap: 22px;
+        margin-top: 40px;
+    }
+
+    .home-experience-section .experience-video-container {
+        width: 100%;
+        height: clamp(260px, 76vw, 360px) !important;
+        order: 1;
+        border-radius: 24px;
+    }
+
+    .home-experience-section .experience-cards {
+        width: 100%;
+        order: 2;
+        gap: 16px;
+    }
+
+    .home-experience-section .experience-card {
+        width: 100%;
+        display: block;
+        padding: 22px;
+    }
+
+    .home-experience-section .experience-card h3 {
+        font-size: 1.45rem;
+    }
+
+    .about-experience-section .experience-card {
+        width: 100%;
+    }
+
+    .slide-right {
+        transform: translateY(24px);
+        filter: none;
+    }
+
+    .slide-right.active {
+        transform: translateY(0);
+    }
+
+    .experience-gallery {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .gallery-item,
+    .gallery-item.large {
+        grid-column: auto;
+        height: 180px;
+    }
+
+    .services-grid,
+    .values-grid,
+    .social-grid,
+    .grid,
+    .menu-gallery,
+    .chefs-grid {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        gap: 18px;
+    }
+
+    .service-card {
+        min-height: 300px;
+        border-radius: 22px;
+    }
+
+    .service-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .carousel-track {
+        gap: 16px;
+    }
+
+    .carousel-slide {
+        min-width: min(78vw, 300px);
+        height: 200px;
+    }
+
+    .menu-image-card {
+        border-radius: 18px;
+    }
+
+    .featured-image,
+    .chef-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .menu-header h2,
+    .section-title {
+        font-size: clamp(1.8rem, 8vw, 2.35rem) !important;
+        line-height: 1.15;
+    }
+
+    .map-container {
+        height: 320px;
+        border-radius: 18px;
+    }
+
+    .contact-info .info-card {
+        padding: 20px;
+        align-items: flex-start;
+        overflow-wrap: anywhere;
+    }
+
+    .input-group input,
+    .input-group textarea {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    footer {
+        margin-top: 42px;
+        padding-inline: 12px;
+    }
+}
+
+@media(max-width:768px){
+    .hero-video-container,
+    .experience-video-container,
+    .chefs-hero-video-container {
+        animation: none !important;
+    }
+
+    .sound-btn {
+        touch-action: manipulation;
+        pointer-events: auto;
+        z-index: 20;
+    }
+}
+
+/* ========================= */
+/* FLAT BLACK THEME */
+/* ========================= */
+
+*,
+*::before,
+*::after {
+    background-image: none !important;
+}
+
+:root {
+    --bg: #151515;
+    --card: #0d0d12;
+    --text: #fff8ef;
+    --muted-text: #d9d1c6;
+    --accent: #ff3f9d;
+    --accent2: #ffd23f;
+    --mex-blue: #1aa7ff;
+    --mex-green: #21c45a;
+    --mex-purple: #9b5cff;
+    --mex-pink: #ff3f9d;
+    --soft: #151018;
+    --shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+html,
+body {
+    background: #151515 !important;
+    color: var(--text);
+}
+
+.bg-decoration {
+    display: none;
+}
+
+.navbar {
+    background: var(--bone) !important;
+    border: 1px solid rgba(255, 210, 63, 0.55);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
+}
+
+.navbar nav {
+    background: var(--bone) !important;
+}
+
+nav a {
+    color: #000000 !important;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #9d245c !important;
+}
+
+nav a::after {
+    background: var(--accent) !important;
+}
+
+#lang-select {
+    background: var(--mex-purple) !important;
+    color: #ffffff;
+}
+
+.cta,
+.btn-select {
+    background: var(--mex-pink) !important;
+    color: #ffffff;
+    box-shadow: 0 12px 26px rgba(255, 63, 157, 0.28);
+}
+
+.btn-primary {
+    background: var(--mex-blue) !important;
+    color: #041018;
+    box-shadow: 0 12px 26px rgba(26, 167, 255, 0.22);
+}
+
+.secondary-btn {
+    background: transparent !important;
+    border: 2px solid var(--accent2);
+    color: var(--accent2);
+}
+
+.about-btn {
+    background: var(--mex-green) !important;
+    border: 2px solid var(--mex-green);
+    color: #031006;
+}
+
+.secondary-btn:hover,
+.about-btn:hover,
+.cta:hover,
+.btn-primary:hover,
+.btn-select:hover {
+    filter: brightness(1.08);
+}
+
+.tag,
+.mini-tag,
+.featured-label,
+.chef-role,
+.section-mini-title {
+    background: #14141d !important;
+    border: 1px solid #2f2f42;
+    color: var(--accent2);
+}
+
+.section-title,
+.menu-header h2 {
+    color: var(--accent2) !important;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+}
+
+.hero-text h1,
+.menu-hero h1,
+.about-hero-text h1,
+.contact-text h1,
+.chefs-hero-text h1 {
+    color: #ffffff;
+    text-shadow: none;
+}
+
+.description,
+.hero-content p,
+.about-hero-text p,
+.contact-text p,
+.chefs-hero-text p,
+.menu-header p,
+.menu-header h3,
+.history-text p,
+.value-card p,
+.experience-card p,
+.contact-info,
+.contact-form,
+.social-card,
+footer p {
+    color: var(--muted-text);
+}
+
+.info-card,
+.featured-card,
+.history-card,
+.value-card,
+.experience-card,
+.contact-container,
+.map-card,
+.social-card,
+.quote-card,
+.about-card,
+.menu-image-card,
+.restaurant-option,
+.chef-card {
+    background: #0d0d12 !important;
+    border: 1px solid #262636;
+    box-shadow: var(--shadow);
+}
+
+.info-card:nth-child(4n + 1),
+.value-card:nth-child(4n + 1),
+.social-card:nth-child(4n + 1) {
+    border-color: var(--mex-pink);
+}
+
+.info-card:nth-child(4n + 2),
+.value-card:nth-child(4n + 2),
+.social-card:nth-child(4n + 2) {
+    border-color: var(--mex-blue);
+}
+
+.info-card:nth-child(4n + 3),
+.value-card:nth-child(4n + 3),
+.social-card:nth-child(4n + 3) {
+    border-color: var(--mex-green);
+}
+
+.info-card:nth-child(4n),
+.value-card:nth-child(4n),
+.social-card:nth-child(4n) {
+    border-color: var(--mex-purple);
+}
+
+.service-card,
+.hero-image-container,
+.hero-video-container,
+.experience-video-container,
+.contact-hero-image-container,
+.history-image-container,
+.about-image-container,
+.chefs-hero-video-container {
+    background: #0d0d12 !important;
+    border: 1px solid #303044;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.62);
+}
+
+.hero-overlay,
+.hero-video-overlay,
+.contact-hero-overlay,
+.history-overlay,
+.about-overlay,
+.service-overlay,
+.chefs-overlay,
+.experience-overlay {
+    background: rgba(0, 0, 0, 0.42) !important;
+}
+
+.input-group input,
+.input-group textarea,
+select {
+    background: #101018 !important;
+    border: 1px solid #303044;
+    color: var(--text);
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: #a9a195;
+}
+
+.sound-btn {
+    background: #11111a !important;
+    border: 1px solid var(--accent2);
+    color: #ffffff;
+}
+
+.value-icon {
+    color: var(--mex-pink);
+}
+
+.service-content h3,
+.featured-card h1,
+.featured-card h2,
+.history-text h2,
+.value-card h3,
+.experience-card h3,
+.experience-text h2,
+.contact-info h2,
+.contact-form h2,
+.map-card h2,
+.quote-card h2,
+footer h3 {
+    color: #ffffff;
+    text-shadow: none;
+}
+
+@media(max-width:768px){
+    .navbar nav {
+        background: var(--bone) !important;
+        border-left: 1px solid rgba(255, 210, 63, 0.55);
+    }
+
+    .navbar nav a,
+    #lang-select {
+        background: var(--bone-soft) !important;
+        border: 1px solid rgba(33, 26, 20, 0.14);
+    }
+
+    .navbar nav a {
+        color: #000000 !important;
+    }
+}
+
+/* ========================= */
+/* BONE CARD BLOCKS */
+/* ========================= */
+
+:root {
+    --bone: #f3ead8;
+    --bone-soft: #fff7e8;
+    --bone-text: #211a14;
+    --bone-muted: #4f4438;
+}
+
+.info-card,
+.featured-card,
+.history-card,
+.value-card,
+.experience-card,
+.contact-container,
+.map-card,
+.social-card,
+.quote-card,
+.about-card,
+.restaurant-option,
+.chef-card {
+    background: var(--bone) !important;
+    color: var(--bone-text) !important;
+    border-color: rgba(255, 210, 63, 0.55);
+}
+
+.info-card h2,
+.featured-card h1,
+.featured-card h2,
+.history-text h2,
+.value-card h3,
+.experience-card h3,
+.experience-text h2,
+.contact-info h2,
+.contact-form h2,
+.map-card h2,
+.quote-card h2,
+.chef-content h3,
+.restaurant-option h3 {
+    color: var(--bone-text) !important;
+}
+
+.info-card p,
+.featured-card p,
+.history-card p,
+.history-text p,
+.value-card p,
+.experience-card p,
+.experience-text p,
+.contact-container p,
+.contact-container a,
+.map-card p,
+.social-card,
+.quote-card p,
+.about-card p,
+.chef-card p,
+.restaurant-option p {
+    color: var(--bone-muted) !important;
+}
+
+.featured-label,
+.chef-role,
+.mini-tag,
+.section-mini-title {
+    background: var(--bone-soft) !important;
+    color: #9d245c !important;
+    border-color: rgba(157, 36, 92, 0.25);
+}
+
+@media(max-width:480px){
+    .page {
+        padding: 10px;
+    }
+
+    .navbar {
+        padding: 10px 12px;
+    }
+
+    .brand img {
+        height: 50px;
+    }
+
+    .navbar nav {
+        width: 100vw;
+        right: -110%;
+        border-radius: 0;
+    }
+
+    .navbar nav.active {
+        right: 0;
+    }
+
+    .hero,
+    .menu-hero,
+    .about-hero,
+    .contact-hero,
+    .chefs-hero {
+        padding: 32px 0 !important;
+    }
+
+    .featured-card,
+    .history-card,
+    .contact-container,
+    .about-card,
+    .chef-card,
+    .about-experience-section .experience-card,
+    .home-experience-section .experience-card {
+        padding: 18px !important;
+    }
+
+    .map-container {
+        height: 280px;
+    }
+}
+
+@media(hover:none) and (pointer:coarse){
+    .service-card:hover,
+    .menu-image-card:hover,
+    .featured-image:hover,
+    .chef-image:hover,
+    .hero-image-container:hover .hero-image,
+    .contact-hero-image-container:hover .contact-hero-image,
+    .history-image-container:hover .history-img,
+    .about-image-container:hover .about-img,
+    .gallery-item:hover img {
+        transform: none;
+    }
+}
+
+@media(max-width:768px){
+    .hero-food-image,
+    .about-hero-image,
+    .contact-image {
+        width: 100%;
+    }
+
+    .featured-card .chef-image-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .featured-card .chef-image-container .chef-image {
+        width: min(260px, 100%);
+        height: auto;
+    }
+
+    .chef-card .chef-image {
+        height: 260px;
+    }
+
+    .chef-card .chef-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .navbar nav {
+        right: 0;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: none;
+    }
+
+    .navbar nav.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
+    }
+
+    .chef-card {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    .chef-card:hover {
+        transform: none;
+    }
+
+    .chef-image-container {
+        overflow: hidden;
+    }
+
+    .steam1 {
+        left: 34%;
+    }
+
+    .steam2 {
+        left: 48%;
+    }
+
+    .steam3 {
+        left: 62%;
+    }
+}
+
+/* ========================= */
+/* BLACK MEXICAN COLOR THEME */
+/* ========================= */
+
+:root {
+    --bg: #030305;
+    --card: rgba(15, 14, 22, 0.88);
+    --text: #fff7ea;
+    --muted-text: #d8ccbc;
+    --accent: #ff3f9d;
+    --accent2: #ffd23f;
+    --mex-blue: #00b7ff;
+    --mex-green: #20d66b;
+    --mex-purple: #9b5cff;
+    --mex-pink: #ff3f9d;
+    --soft: rgba(255, 63, 157, 0.12);
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+body {
+    background:
+        radial-gradient(circle at 10% 8%, rgba(255, 63, 157, 0.22), transparent 26%),
+        radial-gradient(circle at 88% 14%, rgba(0, 183, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 18% 88%, rgba(32, 214, 107, 0.16), transparent 25%),
+        radial-gradient(circle at 86% 82%, rgba(155, 92, 255, 0.20), transparent 26%),
+        #030305;
+    color: var(--text);
+}
+
+.bg-decoration {
+    background:
+        linear-gradient(120deg, rgba(255, 210, 63, 0.06), transparent 36%),
+        radial-gradient(circle at top left, rgba(255, 63, 157, 0.16), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(0, 183, 255, 0.14), transparent 30%);
+}
+
+.navbar {
+    background: rgba(7, 7, 12, 0.78);
+    border: 1px solid rgba(255, 210, 63, 0.18);
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.42),
+        0 0 38px rgba(255, 63, 157, 0.12);
+}
+
+nav a,
+.description,
+.hero-content p,
+.about-hero-text p,
+.contact-text p,
+.chefs-hero-text p,
+.menu-header p,
+.menu-header h3,
+.history-text p,
+.value-card p,
+.experience-card p,
+.contact-info,
+.contact-form,
+.social-card,
+footer p {
+    color: var(--muted-text);
+}
+
+nav a:hover,
+.section-mini-title,
+.featured-label,
+.chef-role,
+.mini-tag {
+    color: var(--accent2);
+}
+
+nav a::after {
+    background: linear-gradient(90deg, var(--mex-pink), var(--mex-blue), var(--mex-green));
+}
+
+#lang-select,
+.cta,
+.btn-primary,
+.btn-select {
+    background: linear-gradient(135deg, var(--mex-pink), var(--mex-purple) 48%, var(--mex-blue));
+    color: #fff;
+    box-shadow:
+        0 14px 28px rgba(255, 63, 157, 0.28),
+        0 0 24px rgba(0, 183, 255, 0.18);
+}
+
+.secondary-btn,
+.about-btn {
+    border: 2px solid var(--accent2);
+    color: var(--accent2);
+    background: rgba(255, 210, 63, 0.08);
+}
+
+.secondary-btn:hover,
+.about-btn:hover {
+    background: linear-gradient(135deg, var(--accent2), var(--mex-green));
+    color: #111;
+}
+
+.tag {
+    background: linear-gradient(135deg, rgba(255, 63, 157, 0.20), rgba(0, 183, 255, 0.14));
+    color: #fff2f9;
+    border: 1px solid rgba(255, 210, 63, 0.22);
+}
+
+.subtitle,
+.section-title,
+.menu-header h2,
+.hero-text h1,
+.menu-hero h1,
+.about-hero-text h1,
+.contact-text h1,
+.chefs-hero-text h1,
+.featured-card h1,
+.featured-card h2,
+.history-text h2,
+.value-card h3,
+.experience-card h3,
+.experience-text h2,
+.contact-info h2,
+.contact-form h2,
+.map-card h2,
+.quote-card h2,
+footer h3 {
+    color: #fffaf0;
+    text-shadow:
+        0 0 20px rgba(255, 63, 157, 0.18),
+        0 0 36px rgba(0, 183, 255, 0.12);
+}
+
+.section-title,
+.menu-header h2 {
+    background: linear-gradient(90deg, var(--mex-pink), var(--accent2), var(--mex-green), var(--mex-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.info-card,
+.featured-card,
+.history-card,
+.value-card,
+.experience-card,
+.contact-container,
+.map-card,
+.social-card,
+.quote-card,
+.about-card,
+.menu-image-card,
+.restaurant-option,
+.chef-card {
+    background:
+        linear-gradient(145deg, rgba(17, 16, 26, 0.94), rgba(8, 8, 12, 0.88)),
+        var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.info-card:nth-child(3n + 1),
+.value-card:nth-child(3n + 1),
+.social-card:nth-child(3n + 1) {
+    border-color: rgba(255, 63, 157, 0.34);
+}
+
+.info-card:nth-child(3n + 2),
+.value-card:nth-child(3n + 2),
+.social-card:nth-child(3n + 2) {
+    border-color: rgba(0, 183, 255, 0.34);
+}
+
+.info-card:nth-child(3n),
+.value-card:nth-child(3n),
+.social-card:nth-child(3n) {
+    border-color: rgba(32, 214, 107, 0.34);
+}
+
+.info-card h2,
+.service-content h3,
+.value-icon,
+.value-card h3,
+.chef-content h3 {
+    color: var(--accent2);
+}
+
+.service-card,
+.hero-image-container,
+.hero-video-container,
+.experience-video-container,
+.contact-hero-image-container,
+.history-image-container,
+.about-image-container,
+.chefs-hero-video-container {
+    border: 1px solid rgba(255, 210, 63, 0.18);
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.55),
+        0 0 34px rgba(255, 63, 157, 0.16);
+}
+
+.hero-overlay,
+.hero-video-overlay,
+.contact-hero-overlay,
+.history-overlay,
+.about-overlay,
+.service-overlay,
+.chefs-overlay,
+.experience-overlay {
+    background:
+        linear-gradient(to top, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.15)),
+        radial-gradient(circle at 20% 20%, rgba(255, 63, 157, 0.18), transparent 34%),
+        radial-gradient(circle at 82% 18%, rgba(0, 183, 255, 0.14), transparent 34%);
+}
+
+.menu-image-card {
+    background: #0a0a0f;
+}
+
+.menu-image-card img {
+    background: #111;
+}
+
+.input-group input,
+.input-group textarea,
+.search-box,
+select {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: var(--text);
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: rgba(255, 247, 234, 0.62);
+}
+
+.sound-btn {
+    background: rgba(5, 5, 10, 0.58);
+    border: 1px solid rgba(255, 210, 63, 0.36);
+    box-shadow: 0 0 24px rgba(255, 210, 63, 0.16);
+}
+
+footer {
+    color: var(--text);
+}
+
+@media(max-width:768px){
+    .navbar nav {
+        background:
+            radial-gradient(circle at top left, rgba(255, 63, 157, 0.18), transparent 36%),
+            radial-gradient(circle at bottom right, rgba(0, 183, 255, 0.16), transparent 34%),
+            rgba(5, 5, 10, 0.98);
+        border-left: 1px solid rgba(255, 210, 63, 0.22);
+    }
+
+    .navbar nav a,
+    #lang-select {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 14px;
+    }
+}
+
+/* ========================= */
+/* FINAL THEME OVERRIDES */
+/* ========================= */
+
+*,
+*::before,
+*::after {
+    background-image: none !important;
+}
+
+:root {
+    --bg: #151515;
+    --bone: #f3ead8;
+    --bone-soft: #fff7e8;
+    --bone-text: #000000;
+    --bone-muted: #4f4438;
+}
+
+html,
+body {
+    background: #151515 !important;
+}
+
+.bg-decoration {
+    display: none !important;
+}
+
+.navbar,
+.navbar nav,
+.info-card,
+.featured-card,
+.history-card,
+.value-card,
+.experience-card,
+.contact-container,
+.map-card,
+.social-card,
+.quote-card,
+.about-card,
+.restaurant-option,
+.chef-card {
+    background: var(--bone) !important;
+    color: var(--bone-text) !important;
+}
+
+.navbar {
+    border: 1px solid rgba(255, 210, 63, 0.55);
+}
+
+nav a,
+.navbar nav a {
+    color: #000000 !important;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #9d245c !important;
+}
+
+.info-card h2,
+.featured-card h1,
+.featured-card h2,
+.history-text h2,
+.value-card h3,
+.experience-card h3,
+.experience-text h2,
+.contact-info h2,
+.contact-form h2,
+.map-card h2,
+.quote-card h2,
+.chef-content h3,
+.restaurant-option h3 {
+    color: var(--bone-text) !important;
+}
+
+.info-card p,
+.featured-card p,
+.history-card p,
+.history-text p,
+.value-card p,
+.experience-card p,
+.experience-text p,
+.contact-container p,
+.contact-container a,
+.map-card p,
+.social-card,
+.quote-card p,
+.about-card p,
+.chef-card p,
+.restaurant-option p {
+    color: var(--bone-muted) !important;
+}
+
+.cta,
+.btn-select {
+    background: #ff3f9d !important;
+    color: #ffffff !important;
+}
+
+.btn-primary {
+    background: #1aa7ff !important;
+    color: #041018 !important;
+}
+
+.secondary-btn {
+    background: transparent !important;
+    border: 2px solid #ffd23f;
+    color: #ffd23f !important;
+}
+
+.about-btn {
+    background: #21c45a !important;
+    border: 2px solid #21c45a;
+    color: #031006 !important;
+}
+
+#lang-select {
+    background: #9b5cff !important;
+    color: #ffffff !important;
+}
+
+.hero-overlay,
+.hero-video-overlay,
+.contact-hero-overlay,
+.history-overlay,
+.about-overlay,
+.service-overlay,
+.chefs-overlay,
+.experience-overlay {
+    background: rgba(0, 0, 0, 0.42) !important;
+}
+
+@media(max-width:768px){
+    .navbar nav {
+        background: var(--bone) !important;
+        border-left: 1px solid rgba(255, 210, 63, 0.55);
+    }
+
+    .navbar nav a {
+        background: var(--bone-soft) !important;
+        color: #000000 !important;
+        border: 1px solid rgba(33, 26, 20, 0.14);
+    }
+
+    .hero-video-container,
+    .experience-video-container,
+    .chefs-hero-video-container {
+        animation: none !important;
+    }
+
+    .sound-btn {
+        touch-action: manipulation;
+        pointer-events: auto;
+        z-index: 20;
+    }
+}

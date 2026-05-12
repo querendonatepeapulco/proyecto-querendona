@@ -15,6 +15,8 @@ const mimeTypes = {
   '.svg': 'image/svg+xml',
   '.webp': 'image/webp',
   '.json': 'application/json',
+  '.mp4': 'video/mp4',
+  '.pdf': 'application/pdf',
 };
 
 http.createServer((req, res) => {

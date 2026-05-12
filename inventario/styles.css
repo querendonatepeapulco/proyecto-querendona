@@ -1005,3 +1005,106 @@ label {
     transition-duration: 0.001ms !important;
   }
 }
+
+.home-link {
+  text-decoration: none;
+  text-align: center;
+  justify-content: center;
+}
+
+@media (max-width: 680px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .app-shell,
+  .main,
+  .sidebar {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .brand img {
+    max-height: 78px;
+    object-fit: contain;
+  }
+
+  .nav-item {
+    padding: 10px;
+    min-width: 0;
+  }
+
+  .topbar-actions,
+  .toolbar-actions,
+  .setting-actions,
+  .modal-actions {
+    width: 100%;
+  }
+
+  .topbar-actions > *,
+  .toolbar-actions > *,
+  .setting-actions > *,
+  .modal-actions > * {
+    width: 100%;
+  }
+
+  .hero-band h2,
+  .toolbar h2,
+  .modal h2 {
+    font-size: clamp(1.45rem, 7vw, 2rem);
+    line-height: 1.15;
+  }
+
+  .warehouse-visual {
+    min-height: 150px;
+  }
+
+  .table-wrap {
+    border-radius: 18px;
+  }
+
+  table {
+    min-width: 760px;
+  }
+
+  .modal-backdrop {
+    padding: 12px;
+  }
+
+  .modal {
+    width: 100%;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .toast {
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100vw - 24px);
+  }
+}
+
+@media (max-width: 420px) {
+  .main,
+  .sidebar {
+    padding: 12px;
+  }
+
+  .login-screen {
+    padding: 14px;
+  }
+
+  .login-card {
+    padding: 26px 18px;
+    border-radius: 22px;
+  }
+
+  .login-card h1 {
+    font-size: 1.9rem;
+    overflow-wrap: anywhere;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
