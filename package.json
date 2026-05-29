@@ -5,9 +5,10 @@
   "description": "Sistema de inventario con login, roles y PostgreSQL.",
   "main": "server.js",
   "scripts": {
+    "build": "node scripts/build-static.js",
     "start": "node server.js",
     "dev": "node server.js",
-    "db:init": "psql \"$DATABASE_URL\" -f schema.sql"
+    "db:init": "psql \"$DATABASE_URL\" -f inventario/schema.sql"
   },
   "dependencies": {
     "dotenv": "^16.4.7",

@@ -11,7 +11,8 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
-const sessions = new Map();
+const SESSION_DURATION_MS = 1000 * 60 * 60 * 8;
+let initPromise;
 
 const demoProducts = [
   ["Laptop Pro 14", "TEC-LP14", "Equipo portatil para administracion", "Tecnologia", "Norte Digital", 18, 6, 14200, 18999, "Almacen A / Rack 1"],
@@ -23,10 +24,53 @@ const demoProducts = [
 ];
 
 app.use(express.json({ limit: "2mb" }));
-app.use(express.static(__dirname));
 
 function hashPassword(password, salt) {
   return crypto.createHash("sha256").update(`${salt}:${password}`).digest("hex");
+}
+
+function base64UrlEncode(value) {
+  return Buffer.from(value).toString("base64").replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
+}
+
+function base64UrlDecode(value) {
+  return Buffer.from(value.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8");
+}
+
+function getSessionSecret() {
+  return process.env.SESSION_SECRET || process.env.DATABASE_URL || "inventario_querendona-dev-secret";
+}
+
+function signPayload(payload) {
+  return base64UrlEncode(crypto.createHmac("sha256", getSessionSecret()).update(payload).digest());
+}
+
+function createSessionToken(user) {
+  const payload = base64UrlEncode(JSON.stringify({
+    user,
+    expiresAt: Date.now() + SESSION_DURATION_MS
+  }));
+  return `${payload}.${signPayload(payload)}`;
+}
+
+function readSessionToken(token) {
+  const [payload, signature] = String(token || "").split(".");
+  if (!payload || !signature) return null;
+
+  const expected = signPayload(payload);
+  const expectedBuffer = Buffer.from(expected);
+  const signatureBuffer = Buffer.from(signature);
+  if (expectedBuffer.length !== signatureBuffer.length || !crypto.timingSafeEqual(expectedBuffer, signatureBuffer)) {
+    return null;
+  }
+
+  try {
+    const session = JSON.parse(base64UrlDecode(payload));
+    if (!session.user || Number(session.expiresAt) < Date.now()) return null;
+    return session.user;
+  } catch (error) {
+    return null;
+  }
 }
 
 function userDto(user) {
@@ -180,6 +224,35 @@ async function seedProducts() {
   }
 }
 
+function getInitPromise() {
+  if (!process.env.DATABASE_URL) {
+    const error = new Error("Falta DATABASE_URL. Configura la variable de entorno en Vercel.");
+    error.status = 500;
+    return Promise.reject(error);
+  }
+
+  if (!initPromise) {
+    initPromise = ensureSchema()
+      .then(seedUsers)
+      .then(seedProducts)
+      .catch((error) => {
+        initPromise = null;
+        throw error;
+      });
+  }
+
+  return initPromise;
+}
+
+app.use("/api", async (req, res, next) => {
+  try {
+    await getInitPromise();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 async function recordMovement(client, product, quantity, note, userId) {
   await client.query(
     `INSERT INTO movements (product_id, product_name, sku, quantity, note, created_by)
@@ -191,7 +264,7 @@ async function recordMovement(client, product, quantity, note, userId) {
 function authRequired(req, res, next) {
   const header = req.get("authorization") || "";
   const token = header.startsWith("Bearer ") ? header.slice(7) : "";
-  const user = sessions.get(token);
+  const user = readSessionToken(token);
   if (!user) {
     res.status(401).json({ error: "Sesion no valida" });
     return;
@@ -220,17 +293,14 @@ app.post("/api/auth/login", async (req, res, next) => {
       return;
     }
 
-    const token = crypto.randomBytes(32).toString("hex");
     const safeUser = userDto(user);
-    sessions.set(token, safeUser);
-    res.json({ token, user: safeUser });
+    res.json({ token: createSessionToken(safeUser), user: safeUser });
   } catch (error) {
     next(error);
   }
 });
 
 app.post("/api/auth/logout", authRequired, (req, res) => {
-  sessions.delete(req.token);
   res.json({ ok: true });
 });
 
@@ -592,9 +662,12 @@ function sanitizeProduct(input) {
   ];
 }
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+if (require.main === module) {
+  app.use(express.static(__dirname));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+  });
+}
 
 app.use((error, req, res, next) => {
   if (error.code === "23505") {
@@ -605,21 +678,18 @@ app.use((error, req, res, next) => {
 });
 
 async function start() {
-  if (!process.env.DATABASE_URL) {
-    console.error("Falta DATABASE_URL. Copia .env.example a .env y configura PostgreSQL.");
-    process.exit(1);
-  }
-
-  await ensureSchema();
-  await seedUsers();
-  await seedProducts();
+  await getInitPromise();
 
   app.listen(port, () => {
     console.log(`inventario_querendona listo en http://localhost:${port}`);
   });
 }
 
-start().catch((error) => {
-  console.error("No se pudo iniciar el servidor:", error);
-  process.exit(1);
-});
+if (require.main === module) {
+  start().catch((error) => {
+    console.error("No se pudo iniciar el servidor:", error);
+    process.exit(1);
+  });
+}
+
+module.exports = app;
