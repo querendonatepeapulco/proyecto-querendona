@@ -894,6 +894,66 @@ width: 100%;
     margin-bottom: 18px;
 }
 
+/* FILOSOFIA INSTITUCIONAL */
+
+.institution-section {
+    margin-bottom: 100px;
+}
+
+.institution-header {
+    max-width: 780px;
+    margin-bottom: 34px;
+}
+
+.institution-header h2 {
+    margin: 18px 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.institution-header p {
+    line-height: 1.9;
+    color: #666;
+}
+
+.institution-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+}
+
+.institution-card,
+.institution-objective {
+    background: white;
+    border-radius: 28px;
+    padding: 38px;
+    box-shadow: var(--shadow);
+}
+
+.institution-card span,
+.institution-objective span {
+    display: inline-block;
+    color: var(--accent);
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+
+.institution-card h3 {
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+.institution-card p,
+.institution-objective p {
+    color: #666;
+    line-height: 1.9;
+}
+
+.institution-objective {
+    margin-top: 28px;
+}
+
 /* VALORES */
 
 .values-section {
@@ -4388,6 +4448,41 @@ nav a:hover {
 .chefs-overlay,
 .experience-overlay {
     background: rgba(0, 0, 0, 0.42) !important;
+}
+
+.institution-card,
+.institution-objective {
+    background:
+        linear-gradient(145deg, rgba(17, 16, 26, 0.94), rgba(8, 8, 12, 0.88)),
+        var(--card) !important;
+    border: 1px solid rgba(255, 210, 63, 0.18);
+    box-shadow:
+        0 22px 60px rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.institution-card:nth-child(1) {
+    border-color: rgba(255, 63, 157, 0.34);
+}
+
+.institution-card:nth-child(2) {
+    border-color: rgba(0, 183, 255, 0.34);
+}
+
+.institution-header h2,
+.institution-card h3 {
+    color: var(--bone-text) !important;
+}
+
+.institution-header p,
+.institution-card p,
+.institution-objective p {
+    color: var(--bone-muted) !important;
+}
+
+.institution-card span,
+.institution-objective span {
+    color: var(--accent2) !important;
 }
 
 @media(max-width:768px){
