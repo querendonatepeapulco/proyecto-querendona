@@ -1094,8 +1094,13 @@ width: 100%;
     gap: 18px;
 }
 
+.input-group {
+    position: relative;
+}
+
 .input-group input,
-.input-group textarea {
+.input-group textarea,
+.input-group select {
     width: 100%;
 
     padding: 18px;
@@ -1114,8 +1119,52 @@ width: 100%;
     transition: .3s ease;
 }
 
+.input-group select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 54px;
+}
+
+.input-group select option {
+    background: #101018;
+    color: #fff;
+}
+
+.date-field input[type="date"] {
+    padding-right: 54px;
+}
+
+.date-field::after {
+    content: "📅";
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.date-field input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0;
+    width: 42px;
+}
+
+.input-group:has(select)::after {
+    content: "⌄";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-54%);
+    color: var(--accent);
+    font-size: 1.25rem;
+    font-weight: 700;
+    pointer-events: none;
+}
+
 .input-group input:focus,
-.input-group textarea:focus {
+.input-group textarea:focus,
+.input-group select:focus {
     transform: scale(1.01);
 
     box-shadow: 0 0 0 3px rgba(164,74,47,0.2);

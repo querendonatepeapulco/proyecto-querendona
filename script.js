@@ -126,7 +126,7 @@ if(reservationForm){
     const reservationDate = reservationForm.querySelector('input[name="date"]');
 
     if(reservationDate){
-        reservationDate.min = getTodayInputDate();
+        setDefaultReservationDate(reservationDate);
     }
 
     reservationForm.addEventListener('submit', (e) => {
@@ -167,6 +167,10 @@ if(reservationForm){
 
         reservationForm.reset();
 
+        if(reservationDate){
+            setDefaultReservationDate(reservationDate);
+        }
+
     });
 
 }
@@ -186,6 +190,16 @@ function formatReservationDate(value){
         month: 'long',
         year: 'numeric'
     });
+
+}
+
+function setDefaultReservationDate(input){
+
+    const today = getTodayInputDate();
+
+    input.min = today;
+    input.value = today;
+    input.defaultValue = today;
 
 }
 
