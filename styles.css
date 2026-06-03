@@ -898,6 +898,7 @@ width: 100%;
 
 .institution-section {
     margin-bottom: 100px;
+    scroll-margin-top: 150px;
 }
 
 .institution-header {
@@ -4469,20 +4470,42 @@ nav a:hover {
     border-color: rgba(0, 183, 255, 0.34);
 }
 
+.institution-section .section-mini-title {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(7, 8, 13, 0.86) !important;
+    border: 1px solid rgba(255, 210, 63, 0.45);
+    border-radius: 999px;
+    color: #ffd23f !important;
+    padding: 9px 16px;
+}
+
 .institution-header h2,
 .institution-card h3 {
-    color: var(--bone-text) !important;
+    color: #fff7ea !important;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
 }
 
 .institution-header p,
 .institution-card p,
 .institution-objective p {
-    color: var(--bone-muted) !important;
+    color: #eadfce !important;
 }
 
 .institution-card span,
 .institution-objective span {
-    color: var(--accent2) !important;
+    color: #ffd23f !important;
+}
+
+.institution-objective {
+    border-color: rgba(255, 210, 63, 0.36);
+}
+
+.institution-card,
+.institution-objective {
+    background:
+        linear-gradient(145deg, rgba(18, 17, 29, 0.98), rgba(7, 8, 13, 0.96)),
+        var(--card) !important;
 }
 
 @media(max-width:768px){
