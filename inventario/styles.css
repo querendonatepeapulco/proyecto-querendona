@@ -751,6 +751,23 @@ tbody tr:hover {
   flex-wrap: wrap;
 }
 
+.stock-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.stock-stack .stock-control {
+  flex-wrap: nowrap;
+}
+
+.unit-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .stock-control button,
 .row-actions button {
   min-width: 34px;

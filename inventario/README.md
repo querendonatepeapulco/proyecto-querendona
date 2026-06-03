@@ -59,6 +59,7 @@ stock         cantidad actual
 min_stock     cantidad minima para activar alerta
 description   descripcion corta
 category      categoria
+unit          unidad de medida, por ejemplo Unidad, Pieza, Litro u Onza
 price         precio
 ```
 

@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS products (
   sku TEXT NOT NULL UNIQUE,
   description TEXT NOT NULL DEFAULT '',
   category TEXT NOT NULL,
+  unit TEXT NOT NULL DEFAULT 'Unidad',
   supplier TEXT NOT NULL DEFAULT '',
   stock INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
   min_stock INTEGER NOT NULL DEFAULT 0 CHECK (min_stock >= 0),

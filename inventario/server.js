@@ -15,12 +15,12 @@ const SESSION_DURATION_MS = 1000 * 60 * 60 * 8;
 let initPromise;
 
 const demoProducts = [
-  ["Laptop Pro 14", "TEC-LP14", "Equipo portatil para administracion", "Tecnologia", "Norte Digital", 18, 6, 14200, 18999, "Almacen A / Rack 1"],
-  ["Monitor 27 QHD", "TEC-M27Q", "Pantalla para punto de venta", "Tecnologia", "Pixel Mayorista", 5, 8, 3600, 5299, "Almacen A / Rack 3"],
-  ["Cafe molido 1 kg", "ALI-CF1K", "Bolsa de cafe molido de kilo", "Alimentos", "Tostadores MX", 42, 15, 118, 189, "Almacen B / Seco"],
-  ["Botella acero 750 ml", "HOG-B750", "Botella reutilizable de acero", "Hogar", "Casa Linea", 0, 10, 95, 169, "Almacen C / Pasillo 2"],
-  ["Cuaderno premium", "OFI-CP01", "Cuaderno para oficina", "Oficina", "Papelera Central", 66, 20, 38, 79, "Almacen B / Estante 5"],
-  ["Silla ergonomica", "OFI-SE22", "Silla para escritorio", "Oficina", "Mobiliario Uno", 7, 7, 1780, 2899, "Showroom / Piso"]
+  ["Laptop Pro 14", "TEC-LP14", "Equipo portatil para administracion", "Tecnologia", "Pieza", "Norte Digital", 18, 6, 14200, 18999, "Almacen A / Rack 1"],
+  ["Monitor 27 QHD", "TEC-M27Q", "Pantalla para punto de venta", "Tecnologia", "Pieza", "Pixel Mayorista", 5, 8, 3600, 5299, "Almacen A / Rack 3"],
+  ["Cafe molido 1 kg", "ALI-CF1K", "Bolsa de cafe molido de kilo", "Alimentos", "Kilogramo", "Tostadores MX", 42, 15, 118, 189, "Almacen B / Seco"],
+  ["Botella acero 750 ml", "HOG-B750", "Botella reutilizable de acero", "Hogar", "Pieza", "Casa Linea", 0, 10, 95, 169, "Almacen C / Pasillo 2"],
+  ["Cuaderno premium", "OFI-CP01", "Cuaderno para oficina", "Oficina", "Pieza", "Papelera Central", 66, 20, 38, 79, "Almacen B / Estante 5"],
+  ["Silla ergonomica", "OFI-SE22", "Silla para escritorio", "Oficina", "Pieza", "Mobiliario Uno", 7, 7, 1780, 2899, "Showroom / Piso"]
 ];
 
 app.use(express.json({ limit: "2mb" }));
@@ -90,6 +90,7 @@ function productDto(row) {
     sku: row.sku,
     description: row.description,
     category: row.category,
+    unit: row.unit || "Unidad",
     supplier: row.supplier,
     stock: Number(row.stock),
     minStock: Number(row.min_stock),
@@ -151,6 +152,7 @@ async function ensureSchema() {
       sku TEXT NOT NULL UNIQUE,
       description TEXT NOT NULL DEFAULT '',
       category TEXT NOT NULL,
+      unit TEXT NOT NULL DEFAULT 'Unidad',
       supplier TEXT NOT NULL DEFAULT '',
       stock INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
       min_stock INTEGER NOT NULL DEFAULT 0 CHECK (min_stock >= 0),
@@ -162,6 +164,7 @@ async function ensureSchema() {
     )
   `);
   await query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS description TEXT NOT NULL DEFAULT ''`);
+  await query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS unit TEXT NOT NULL DEFAULT 'Unidad'`);
   await query(`
     CREATE TABLE IF NOT EXISTS movements (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -216,8 +219,8 @@ async function seedProducts() {
 
   for (const product of demoProducts) {
     await query(
-      `INSERT INTO products (name, sku, description, category, supplier, stock, min_stock, cost, price, location)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      `INSERT INTO products (name, sku, description, category, unit, supplier, stock, min_stock, cost, price, location)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
        ON CONFLICT (sku) DO NOTHING`,
       product
     );
@@ -321,8 +324,8 @@ app.post("/api/products", authRequired, async (req, res, next) => {
   try {
     const product = sanitizeProduct(req.body);
     const result = await query(
-      `INSERT INTO products (name, sku, description, category, supplier, stock, min_stock, cost, price, location)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      `INSERT INTO products (name, sku, description, category, unit, supplier, stock, min_stock, cost, price, location)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
        RETURNING *`,
       product
     );
@@ -353,9 +356,9 @@ app.put("/api/products/:id", authRequired, adminRequired, async (req, res, next)
     const previous = previousResult.rows[0];
     const result = await client.query(
       `UPDATE products
-       SET name = $1, sku = $2, description = $3, category = $4, supplier = $5, stock = $6, min_stock = $7,
-           cost = $8, price = $9, location = $10, updated_at = now()
-       WHERE id = $11
+       SET name = $1, sku = $2, description = $3, category = $4, unit = $5, supplier = $6, stock = $7, min_stock = $8,
+           cost = $9, price = $10, location = $11, updated_at = now()
+       WHERE id = $12
        RETURNING *`,
       [...product, req.params.id]
     );
@@ -573,8 +576,8 @@ app.post("/api/import", authRequired, adminRequired, async (req, res, next) => {
     await client.query(`DELETE FROM products`);
     for (const item of products) {
       await client.query(
-        `INSERT INTO products (name, sku, description, category, supplier, stock, min_stock, cost, price, location)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+        `INSERT INTO products (name, sku, description, category, unit, supplier, stock, min_stock, cost, price, location)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
         sanitizeProduct(item)
       );
     }
@@ -597,8 +600,8 @@ app.post("/api/reset-demo", authRequired, adminRequired, async (req, res, next) 
     await client.query(`DELETE FROM products`);
     for (const product of demoProducts) {
       await client.query(
-        `INSERT INTO products (name, sku, description, category, supplier, stock, min_stock, cost, price, location)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+        `INSERT INTO products (name, sku, description, category, unit, supplier, stock, min_stock, cost, price, location)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
         product
       );
     }
@@ -618,6 +621,7 @@ function sanitizeProduct(input) {
     sku: String(input.sku || "").trim().toUpperCase(),
     description: String(input.description || "").trim(),
     category: String(input.category || "").trim(),
+    unit: String(input.unit || "Unidad").trim() || "Unidad",
     supplier: String(input.supplier || "").trim(),
     stock: Number(input.stock),
     minStock: Number(input.minStock),
@@ -653,6 +657,7 @@ function sanitizeProduct(input) {
     product.sku,
     product.description,
     product.category,
+    product.unit,
     product.supplier,
     product.stock,
     product.minStock,

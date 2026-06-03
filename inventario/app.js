@@ -178,7 +178,7 @@ function filteredProducts() {
   const stock = els.stockFilter.value;
 
   return state.products.filter((product) => {
-    const haystack = `${product.name} ${product.sku} ${product.category} ${product.description}`.toLowerCase();
+    const haystack = `${product.name} ${product.sku} ${product.category} ${product.description} ${product.unit || ""}`.toLowerCase();
     const queryMatch = !query || haystack.includes(query);
     const categoryMatch = category === "all" || product.category === category;
     const statusMatch = stock === "all" || getStockStatus(product).key === stock;
@@ -230,14 +230,22 @@ function renderProducts() {
 
   products.forEach((product) => {
     const status = getStockStatus(product);
+    const unitLabel = product.unit || "Unidad";
     const stockCell = isAdmin()
       ? `
+        <div class="stock-stack">
         <div class="stock-control">
           <button type="button" title="Salida" data-action="adjust" data-id="${product.id}" data-amount="-1">−</button>
           <strong>${product.stock}</strong>
           <button type="button" title="Entrada" data-action="adjust" data-id="${product.id}" data-amount="1">+</button>
+        </div>
+        <small class="unit-label">${escapeHtml(unitLabel)}</small>
         </div>`
-      : `<strong>${product.stock}</strong>`;
+      : `
+        <div class="stock-stack">
+          <strong>${product.stock}</strong>
+          <small class="unit-label">${escapeHtml(unitLabel)}</small>
+        </div>`;
     const actionsCell = isAdmin()
       ? `
         <div class="row-actions">
@@ -468,6 +476,7 @@ async function saveProductFromForm(event) {
     sku: formData.get("sku").trim().toUpperCase(),
     description: formData.get("description").trim(),
     category: formData.get("category").trim(),
+    unit: formData.get("unit").trim(),
     supplier: "",
     stock: Number(formData.get("stock")),
     minStock: Number(formData.get("minStock")),
