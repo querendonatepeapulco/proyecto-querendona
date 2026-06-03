@@ -455,7 +455,11 @@ menuToggle.addEventListener('click', ()=>{
 
     mobileMenu.classList.toggle('active');
 
-    if(mobileMenu.classList.contains('active')){
+    const isMenuOpen = mobileMenu.classList.contains('active');
+
+    menuToggle.classList.toggle('active', isMenuOpen);
+
+    if(isMenuOpen){
 
         menuToggle.innerHTML = '✕';
 
@@ -469,6 +473,7 @@ menuToggle.addEventListener('click', ()=>{
 mobileMenu.querySelectorAll('a').forEach((link)=>{
     link.addEventListener('click', ()=>{
         mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
         menuToggle.innerHTML = '☰';
     });
 });

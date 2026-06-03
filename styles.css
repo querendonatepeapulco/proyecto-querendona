@@ -3848,6 +3848,17 @@ footer h3 {
         text-shadow: none !important;
     }
 
+    .menu-toggle.active {
+        position: fixed;
+        top: 22px;
+        right: 22px;
+        z-index: 10000;
+    }
+
+    .navbar nav {
+        padding-top: 118px;
+    }
+
     .navbar nav {
         background: var(--bone) !important;
         border-left: 1px solid rgba(255, 210, 63, 0.55);
@@ -4533,6 +4544,10 @@ nav a:hover {
 }
 
 @media(max-width:768px){
+    .navbar #mobileMenu.active {
+        padding: 118px 22px 28px !important;
+    }
+
     .navbar nav {
         background: var(--bone) !important;
         border-left: 1px solid rgba(255, 210, 63, 0.55);
