@@ -129,6 +129,11 @@ if(reservationForm){
 
     if(reservationDate){
         setDefaultReservationDate(reservationDate);
+        const dateField = reservationDate.closest('.date-field');
+
+        if(dateField){
+            dateField.addEventListener('click', () => openReservationDatePicker(reservationDate));
+        }
     }
 
     if(customerNumberInput){
@@ -284,6 +289,21 @@ function setDefaultReservationDate(input){
     input.min = today;
     input.value = today;
     input.defaultValue = today;
+
+}
+
+function openReservationDatePicker(input){
+
+    try {
+        if(typeof input.showPicker === 'function'){
+            input.showPicker();
+            return;
+        }
+    } catch (error) {
+        // El navegador puede bloquear showPicker si ya abrio el calendario nativo.
+    }
+
+    input.focus();
 
 }
 
