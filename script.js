@@ -119,14 +119,20 @@ behavior: 'smooth'
 /* RESERVACIÓN */
 /* ========================= */
 
+const RESERVATION_COUNTER_KEY = 'querendonaReservationCounter';
 const reservationForm = document.getElementById('reservationForm');
 
 if(reservationForm){
 
     const reservationDate = reservationForm.querySelector('input[name="date"]');
+    const customerNumberInput = reservationForm.querySelector('input[name="customerNumber"]');
 
     if(reservationDate){
         setDefaultReservationDate(reservationDate);
+    }
+
+    if(customerNumberInput){
+        setReservationCustomerNumber(customerNumberInput);
     }
 
     reservationForm.addEventListener('submit', (e) => {
@@ -134,11 +140,13 @@ if(reservationForm){
         e.preventDefault();
 
         const formData = new FormData(reservationForm);
+        const customerNumber = String(formData.get('customerNumber') || '').trim();
         const name = String(formData.get('name') || '').trim();
         const email = String(formData.get('email') || '').trim();
         const phone = String(formData.get('phone') || '').trim();
         const date = String(formData.get('date') || '');
         const time = String(formData.get('time') || '');
+        const celebrationType = String(formData.get('celebrationType') || '').trim();
         const message = String(formData.get('message') || '').trim();
         const formattedDate = formatReservationDate(date);
         const formattedTime = formatReservationTime(time);
@@ -146,11 +154,13 @@ if(reservationForm){
         const reservationMessage = [
             'Hola, quiero hacer una reservación en La Querendona.',
             '',
+            `No. de cliente: ${customerNumber}`,
             `Nombre: ${name}`,
             `Correo: ${email}`,
             `Teléfono: ${phone}`,
             `Fecha: ${formattedDate}`,
             `Hora: ${formattedTime}`,
+            `Tipo de celebración: ${celebrationType}`,
             `Detalles: ${message || 'Sin detalles adicionales'}`,
             '',
             '¿Me pueden confirmar disponibilidad?'
@@ -165,13 +175,87 @@ if(reservationForm){
 
         showToast('Te llevamos a WhatsApp para confirmar tu reservación.');
 
+        confirmReservationCustomerNumber(customerNumber);
         reservationForm.reset();
 
         if(reservationDate){
             setDefaultReservationDate(reservationDate);
         }
 
+        if(customerNumberInput){
+            setReservationCustomerNumber(customerNumberInput);
+        }
+
     });
+
+}
+
+function setReservationCustomerNumber(input){
+
+    input.value = getNextReservationCustomerNumber();
+
+}
+
+function getNextReservationCustomerNumber(){
+
+    const today = getTodayInputDate();
+    const counter = getReservationCounter(today);
+    const nextNumber = counter.count + 1;
+
+    return formatReservationCustomerNumber(today, nextNumber);
+
+}
+
+function confirmReservationCustomerNumber(customerNumber){
+
+    const today = getTodayInputDate();
+    const sequence = getReservationSequence(customerNumber, today);
+
+    if(!sequence){
+        return;
+    }
+
+    const counter = getReservationCounter(today);
+    const nextCount = Math.max(counter.count, sequence);
+
+    localStorage.setItem(RESERVATION_COUNTER_KEY, JSON.stringify({
+        date: today,
+        count: nextCount
+    }));
+
+}
+
+function getReservationCounter(today){
+
+    try {
+        const counter = JSON.parse(localStorage.getItem(RESERVATION_COUNTER_KEY));
+
+        if(counter && counter.date === today && Number.isInteger(counter.count)){
+            return counter;
+        }
+    } catch (error) {
+        localStorage.removeItem(RESERVATION_COUNTER_KEY);
+    }
+
+    return { date: today, count: 0 };
+
+}
+
+function getReservationSequence(customerNumber, today){
+
+    const compactDate = today.replaceAll('-', '');
+    const match = String(customerNumber || '').match(new RegExp(`^CL-${compactDate}-(\\d+)$`));
+
+    return match ? Number(match[1]) : 0;
+
+}
+
+function formatReservationCustomerNumber(date, sequence){
+
+    const compactDate = date.replaceAll('-', '');
+    const paddedSequence = String(sequence).padStart(3, '0');
+
+    return `CL-${compactDate}-${paddedSequence}`;
 
 }
 

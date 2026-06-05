@@ -1191,6 +1191,12 @@ width: 100%;
     color: #fff;
 }
 
+.input-group input[readonly] {
+    color: #ffffff;
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
 .date-field input[type="date"] {
     padding-right: 54px;
 }
