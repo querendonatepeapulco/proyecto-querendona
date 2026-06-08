@@ -15,6 +15,7 @@ const staticEntries = [
   "styles2.css",
   "opcion.css",
   "script.js",
+  "translations.js",
   "img",
   path.join("inventario", "index.html"),
   path.join("inventario", "login.html"),

@@ -1,4 +1,30 @@
 // ANIMACIÓN REVEAL AL HACER SCROLL
+function translateSiteText(text){
+    return window.LaQuerendonaI18n?.t(text) || text;
+}
+
+function getSiteLocale(){
+    const language = window.LaQuerendonaI18n?.getLanguage() || 'es';
+
+    return {
+        es: 'es-MX',
+        en: 'en-US',
+        fr: 'fr-FR'
+    }[language] || 'es-MX';
+}
+
+document.addEventListener('laquerendona:languagechange', () => {
+    document.querySelectorAll('.sound-btn').forEach((button) => {
+        const container = button.closest(
+            '.hero-video-container, .experience-video-container, .chefs-hero-video-container'
+        );
+        const video = container ? container.querySelector('video') : null;
+        const label = video && !video.muted ? 'Silenciar video' : 'Activar sonido';
+
+        button.setAttribute('aria-label', translateSiteText(label));
+    });
+});
+
 const reveals = document.querySelectorAll('.reveal');
 
 function revealOnScroll(){
@@ -103,7 +129,7 @@ toast.classList.remove('show');
 
 function addToOrder(itemName) {
 
-showToast(`Añadido: ${itemName} `);
+showToast(`${translateSiteText('Añadido')}: ${itemName} `);
 }
 // SCROLL SUAVE
 function scrollToMenu() {
@@ -157,18 +183,18 @@ if(reservationForm){
         const formattedTime = formatReservationTime(time);
         const whatsappNumber = '527713420990';
         const reservationMessage = [
-            'Hola, quiero hacer una reservación en La Querendona.',
+            translateSiteText('Hola, quiero hacer una reservación en La Querendona.'),
             '',
-            `No. de cliente: ${customerNumber}`,
-            `Nombre: ${name}`,
-            `Correo: ${email}`,
-            `Teléfono: ${phone}`,
-            `Fecha: ${formattedDate}`,
-            `Hora: ${formattedTime}`,
-            `Tipo de celebración: ${celebrationType}`,
-            `Detalles: ${message || 'Sin detalles adicionales'}`,
+            `${translateSiteText('No. de cliente')}: ${customerNumber}`,
+            `${translateSiteText('Nombre')}: ${name}`,
+            `${translateSiteText('Correo')}: ${email}`,
+            `${translateSiteText('Teléfono')}: ${phone}`,
+            `${translateSiteText('Fecha')}: ${formattedDate}`,
+            `${translateSiteText('Hora')}: ${formattedTime}`,
+            `${translateSiteText('Tipo de celebración')}: ${translateSiteText(celebrationType)}`,
+            `${translateSiteText('Detalles')}: ${message || translateSiteText('Sin detalles adicionales')}`,
             '',
-            '¿Me pueden confirmar disponibilidad?'
+            translateSiteText('¿Me pueden confirmar disponibilidad?')
         ].join('\n');
         const whatsappUrl =
             `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(reservationMessage)}`;
@@ -178,7 +204,7 @@ if(reservationForm){
             window.location.href = whatsappUrl;
         }
 
-        showToast('Te llevamos a WhatsApp para confirmar tu reservación.');
+        showToast(translateSiteText('Te llevamos a WhatsApp para confirmar tu reservación.'));
 
         confirmReservationCustomerNumber(customerNumber);
         reservationForm.reset();
@@ -273,7 +299,7 @@ function formatReservationDate(value){
     const [year, month, day] = value.split('-').map(Number);
     const date = new Date(year, month - 1, day);
 
-    return date.toLocaleDateString('es-MX', {
+    return date.toLocaleDateString(getSiteLocale(), {
         weekday: 'long',
         day: 'numeric',
         month: 'long',
@@ -329,7 +355,7 @@ function formatReservationTime(value){
 
     date.setHours(hours, minutes, 0, 0);
 
-    return date.toLocaleTimeString('es-MX', {
+    return date.toLocaleTimeString(getSiteLocale(), {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true
@@ -405,7 +431,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
         video.setAttribute('preload', 'auto');
 
         button.setAttribute('type', 'button');
-        button.setAttribute('aria-label', 'Activar sonido');
+        button.setAttribute('aria-label', translateSiteText('Activar sonido'));
 
         button.addEventListener('click', async ()=>{
 
@@ -426,7 +452,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                     await video.play();
 
                     button.innerHTML = '🔊';
-                    button.setAttribute('aria-label', 'Silenciar video');
+                    button.setAttribute('aria-label', translateSiteText('Silenciar video'));
 
                 }else{
 
@@ -436,7 +462,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                     await video.play().catch(()=>{});
 
                     button.innerHTML = '🔇';
-                    button.setAttribute('aria-label', 'Activar sonido');
+                    button.setAttribute('aria-label', translateSiteText('Activar sonido'));
                 }
 
             }catch(error){
@@ -445,7 +471,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
                 video.defaultMuted = false;
                 video.volume = 1;
                 button.innerHTML = '🔊';
-                button.setAttribute('aria-label', 'Silenciar video');
+                button.setAttribute('aria-label', translateSiteText('Silenciar video'));
 
             }finally{
 
